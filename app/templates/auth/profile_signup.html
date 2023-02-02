@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <h1>유저등록 페이지</h1>
+
+    <form method="post">
+        {{ form.csrf_token }}
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="profile_name">이름</label>
+            <input type="text" class="form-control" name="profile_name" id="profile_name"
+                   value="{{ form.profile_name.data or '' }}">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">추가하기</button>
+    </form>
+</div>
+
+{% endblock %}

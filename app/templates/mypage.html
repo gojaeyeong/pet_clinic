@@ -1,0 +1,122 @@
+{% extends 'base.html' %}    
+{% block content %}
+<h5 class="my-3 border-bottom pb-2">마이 페이지</h5>
+    <div class="container my-3">
+    {% if g.user.type=='clinic' %}
+    <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-uqo3">ID</th>
+            <th class="tg-0lax" style="width:80%">{{ g.user.user_id }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-uqo3">상호명</td>
+            <td class="tg-0lax">{{ g.user.clinic_name }}</td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">사업자등록번호</td>
+            <td class="tg-0lax">{{ g.user.corporate_registration_number }}</td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">비밀번호</td>
+            <td class="tg-0lax">
+                <form method="post">
+                    {{ form.csrf_token }}
+                    {% include "form_errors.html" %}
+                현재 비밀번호<input type="password" class="form-control" name="password" id="password">
+                새 비밀번호<input type="password" class="form-control" name="password1" id="password1" >
+                비밀번호 확인<input type="password" class="form-control" name="password2" id="password2">
+                <br>
+                <button type="submit" class="btn btn-primary">비밀번호 변경</button> 
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">전화번호</td>
+            <td class="tg-0lax">{{ g.user.phone }} </td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">이메일</td>
+            <td class="tg-0lax">{{ g.user.email }} </td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">아바타선택</td>
+            <td class="tg-0lax"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+              </svg></td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">사용자</td>
+            <td class="tg-0lax">{% for profile in profile_list %}
+                <a href="/board/{{ profile.idx }}/">{{ profile.profile_name }}</a>
+                {% endfor %}
+                <a href="{{ url_for('auth.profile_signup') }}"><button type="button">등록</button></a>
+                <a href="{{ url_for('auth.profile_delete') }}"><button type="button">삭제</button></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">결제카드</td>
+            <td class="tg-0lax">
+                <i class="bi bi-credit-card-2-back"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
+                    <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
+                    <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
+                  </svg> 
+                <a href="#"><button type="button">카드관리</button></a>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    {% elif g.user.type=='specialist' %}
+    <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-uqo3">ID</th>
+            <th class="tg-0lax">{{ g.user.user_id }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-uqo3" style="width:50%">이름</td>
+            <td class="tg-0lax">{{ g.user.name }}</td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">수의사등록번호</td>
+            <td class="tg-0lax">{{ g.user.specialist_license_number }}</td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">비밀번호</td>
+            <td class="tg-0lax">
+                <form method="post">
+                    {{ form.csrf_token }}
+                    {% include "form_errors.html" %}
+                현재 비밀번호<input type="password" class="form-control" name="password" id="password">
+                새 비밀번호<input type="password" class="form-control" name="password1" id="password1" >
+                비밀번호 확인<input type="password" class="form-control" name="password2" id="password2">
+                <br>
+                <button type="submit" class="btn btn-primary">비밀번호 변경</button> 
+                </form>
+            </td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">전화번호</td>
+            <td class="tg-0lax">{{ g.user.phone }}</td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">아바타선택</td>
+            <td class="tg-0lax"></td>
+          </tr>
+          <tr>
+            <td class="tg-uqo3">계좌번호</td>
+            <td class="tg-0lax">
+                <a href="#"><button type="button">계좌관리</button></a>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+    {%endif%}
+</div>
+
+{% endblock %}

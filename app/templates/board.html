@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <h5 class="my-3 border-bottom pb-2">메인보드 페이지</h5>
+{% if profile %}
+  {{ profile.profile_name }}님의 메인보드 페이지입니다.
+{% else %}
+  {{ g.user.name }}님의 메인보드 페이지입니다.
+{% endif %}
+</div>
+
+{% endblock %}

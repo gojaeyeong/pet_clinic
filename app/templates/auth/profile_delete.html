@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <h5 class="my-3 border-bottom pb-2">유저 삭제 페이지</h5>
+   
+    {% for profile in profile_list %}
+    <li><a href="javascript:void(0)" class="delete btn btn-sm btn-outline-secondary"
+        data-uri="{{ url_for('auth.delete', profile_idx=profile.idx) }}">{{ profile.profile_name }}삭제</a></li>
+    {% endfor %}
+   
+</div>
+
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+{% endblock %}
